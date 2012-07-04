@@ -1,0 +1,11 @@
+
+**** Build of configuration Default for project b6 ****
+
+make all 
+[  1%] Building CXX object src/ves/CMakeFiles/ves.dir/vesActor.cpp.o
+The system cannot find the path specified.
+make[2]: *** [src/ves/CMakeFiles/ves.dir/vesActor.cpp.o] Error 1
+make[1]: *** [src/ves/CMakeFiles/ves.dir/all] Error 2
+make: *** [all] Error 2
+
+**** Build Finished ****

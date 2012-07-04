@@ -1,0 +1,89 @@
+package test.db.namespace;
+
+import java.util.ArrayList;
+import java.util.List;
+ 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+ 
+public class DB extends SQLiteOpenHelper {
+ 
+    // All Static variables
+    // Database Version
+    private static final int DATABASE_VERSION = 3;
+ 
+    // Database Name
+    private static final String DATABASE_NAME = "KCal";
+ 
+    // Contacts table name
+    private static final String TABLE_CAL = "KCalendar";
+ 
+    // Contacts Table Columns names
+    private static final String KEY_ID = "id";
+    private static final String KEY_DATE = "Date";
+    private static final String KEY_DAY = "Day";
+    private static final String KEY_TITHI = "Tithi";
+    private static final String KEY_FESTIVAL = "Festival";
+ 
+    
+    public DB(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+ 
+    // Creating Tables
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+//        String CREATE_KCAL_TABLE = "CREATE TABLE " + TABLE_CAL + "("
+//                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_DATE + " TEXT,"
+//                + KEY_PH_NO + " TEXT" + ")";
+//        db.execSQL(CREATE_CONTACTS_TABLE);
+    }
+ 
+    // Upgrading database
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Drop older table if existed
+//        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CONTACTS);
+// 
+//        // Create tables again
+//        onCreate(db);
+    }
+ 
+    /**
+     * All CRUD(Create, Read, Update, Delete) Operations
+     */
+ 
+
+ 
+    
+    // Get the information for a given month
+    //***** THE CALLING FUNCTIoN MUST CLOSE THE CURSOR>>> 
+    public Cursor getMonthInformation(int month)
+    {
+    	String[] Months =  {"MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC","JAN", "FEB"};
+    	String strMonth = Months[month-1];
+    	String countQuery; 
+    	if(month ==  1)
+    	{
+    		//2012 March
+    		countQuery = "SELECT * FROM " +  TABLE_CAL;// + " WHERE Date LIKE '%Mar'  LIMIT 9";
+    		
+    	} else
+    	if(month == 2)
+    	{
+    		//2012 Apr
+    		countQuery = "SELECT * FROM " +  TABLE_CAL + " WHERE Date LIKE '%Apr'  LIMIT 30";
+    	}else
+    	{
+    	countQuery = "SELECT  * FROM " + TABLE_CAL + " WHERE Date LIKE " + "\'%" + strMonth + "\'";
+    	} 
+    	SQLiteDatabase db = this.getReadableDatabase();
+         Cursor cursor = db.rawQuery(countQuery, null);
+         return cursor;
+    	
+    }
+ 
+}

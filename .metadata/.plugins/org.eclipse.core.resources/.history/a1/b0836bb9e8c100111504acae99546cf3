@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	android:id="@+id/widget33"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+<TableLayout
+	android:id="@+id/widget34"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+<TableRow
+	android:id="@+id/widget1111"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:orientation="horizontal">
+<TextView
+	android:id="@+id/feedback_intro"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:layout_marginTop="5dp"
+	android:layout_marginBottom="5dp"
+	android:layout_marginLeft="5dp"
+	android:layout_marginRight="5dp"
+	android:text="Your feedback is precious. Please submit your feedback below and tell me more about what you liked, or what you would wish to see in the future version of this application"
+	android:textStyle="bold"
+	android:textColor="#ff00cccc" />
+</TableRow>
+<TableRow
+	android:id="@+id/widget35"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:orientation="horizontal">
+<TextView
+	android:id="@+id/feedback"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="Your feedback:" />
+</TableRow>
+<TableRow
+	android:id="@+id/widget36"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:orientation="horizontal">
+<EditText
+	android:id="@+id/edit_feedback"
+	android:layout_width="313px"
+	android:layout_height="96px"
+	android:textSize="18sp" />
+</TableRow>
+<TableRow
+	android:id="@+id/widget41"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:orientation="horizontal">
+<TextView
+	android:id="@+id/user_name"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="Your name(optional):" />
+</TableRow>
+<TableRow
+	android:id="@+id/widget42"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:orientation="horizontal">
+<EditText
+	android:id="@+id/edit_user_name"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:textSize="18sp" />
+</TableRow>
+<TableRow
+	android:id="@+id/widget46"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:orientation="horizontal">
+<RatingBar
+	android:id="@+id/rating_value"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content" />
+</TableRow>
+<TableRow
+	android:id="@+id/widget44"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:orientation="horizontal">
+<TextView
+	android:id="@+id/ratings_bar"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="Rating(optional):" />
+</TableRow>
+
+</TableLayout>
+<Button
+	android:id="@+id/send_feedback"
+	android:layout_width="320px"
+	android:layout_height="wrap_content"
+	android:text="Send Feedback" />
+</LinearLayout>

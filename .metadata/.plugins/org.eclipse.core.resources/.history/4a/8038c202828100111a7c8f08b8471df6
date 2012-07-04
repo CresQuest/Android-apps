@@ -1,0 +1,78 @@
+/**
+ * 
+ */
+package kashmiri.calendar.namespace;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
+
+/**
+ * @author ikhit02
+ *
+ */
+public class CalendarWidget extends TableLayout 
+ {
+
+	/**
+	 * @param context
+	 */
+	public CalendarWidget(Context context) {
+		super(context);
+		setupUI(context);
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @param context
+	 * @param attrs
+	 */
+	public CalendarWidget(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		setupUI(context);
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @param context
+	 * @param attrs
+	 * @param defStyle
+	 */
+	public CalendarWidget(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs);
+		setupUI(context);
+		// TODO Auto-generated constructor stub
+	}
+	public void setupUI(Context context){
+		//1. Setup cells of dimension 5x7
+		//2. Each cell is a vertical layout if three text views.
+
+		for(int i = 0; i < 5; ++i)
+		{
+			TableRow tr = new TableRow(context);
+            tr.setLayoutParams(new LayoutParams(
+                           LayoutParams.FILL_PARENT,
+                           LayoutParams.WRAP_CONTENT));
+			for(int j = 0; j < 7; ++j)
+			{
+				CalendarCell cell = new CalendarCell(context);
+				int num = i*7+j +1;
+				cell.SetCellNo(num);
+				//TextView cell = new TextView(context);
+				String Date = "" + num;
+				cell.date.setText(Date);
+				tr.addView(cell);
+			}
+			this.addView(tr);
+			
+		}
+	
+	
+	}
+	
+}

@@ -1,0 +1,208 @@
+package kashmiri.calendar.namespace;
+
+
+
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.NinePatchDrawable;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
+import android.widget.TableLayout;
+import android.widget.TextView;
+import android.widget.ViewFlipper;
+
+public class CalendarCell extends LinearLayout implements View.OnClickListener{
+
+	public CalendarCell(Context context, MainPage page) {
+		super(context);
+		m_page = page;
+		Drawable myNinePatchDrawable = getResources().getDrawable(R.drawable.cell);
+		setBackgroundDrawable(myNinePatchDrawable);
+		date =  new TextView(context);
+		date.setTextSize((float) 18.0);
+		
+		this.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	ViewFlipper flipper = KCalFragment.getFlipper();
+        		if (0 == flipper.getDisplayedChild())
+        		{
+        		
+        			
+        			
+        			TextView dayview_date = (TextView)dayview.findViewById(R.id.dayview_date);
+        			TextView dayview_info = (TextView)dayview.findViewById(R.id.dayview_info);
+        			
+        			
+        			
+        			Button dayview_addreminder = (Button)dayview.findViewById(R.id.dayview_addreminder);
+        			dayview_addreminder.setOnClickListener(new View.OnClickListener() {
+						
+						public void onClick(View v) {
+							
+							LayoutInflater inflater = (LayoutInflater)getContext().getSystemService
+		        				      (Context.LAYOUT_INFLATER_SERVICE);
+		        			View addreminder = inflater.inflate(R.layout.add_reminder,null);
+		        			//set adapter for spinner
+		        			Spinner spinner = (Spinner) addreminder.findViewById(R.id.spinner);
+		        			ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+		        		            getContext(), R.array.numbers, android.R.layout.simple_spinner_item);
+		        		    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		        		    spinner.setAdapter(adapter);
+		        			
+		        		    TextView reminder_name = (TextView)addreminder.findViewById(R.id.editReminder);
+		        		    TextView reminder_description = (TextView)addreminder.findViewById(R.id.editReminderdescription);
+		        		    
+		        		    
+		        			ViewFlipper flipper = KCalFragment.getFlipper();
+		        			flipper.addView(addreminder);
+		        			flipper.showNext();
+		        			
+		        			Button ok = (Button)addreminder.findViewById(R.id.buttonOK);
+		        			ok.setOnClickListener(new View.OnClickListener() {
+								
+								public void onClick(View v) {
+									
+									ViewFlipper flipper = KCalFragment.getFlipper();
+				        			flipper.showPrevious();
+				        			m_page.mgr.SetReminder(dayview_date.getText(), reminder_name.getText(), editReminderdescription.getText(),0);
+				        			flipper.removeViewAt(1);
+									
+								}
+							});
+		        			Button cancel = (Button)addreminder.findViewById(R.id.buttonCancel);
+		        			cancel.setOnClickListener(new View.OnClickListener() {
+								
+								public void onClick(View v) {
+									
+									ViewFlipper flipper = KCalFragment.getFlipper();
+				        			flipper.showPrevious();
+				        			flipper.removeViewAt(1);
+								}
+							});
+						}
+					});
+        			
+        			Button back = (Button)dayview.findViewById(R.id.dayview_back);
+        			back.setOnClickListener(new View.OnClickListener() {
+						
+						public void onClick(View v) {
+							ViewFlipper flipper = KCalFragment.getFlipper();
+							flipper.setDisplayedChild(0);
+		        			flipper.removeViewAt(1);
+							
+						}
+					});
+        			
+        			CalendarCell temp = (CalendarCell)v;//(CalendarCell)v.getParent();
+        			
+        			dayview_date.setText(temp.date.getText());
+        			dayview_info.setText(temp.info.getText());;
+        			
+        		
+        			
+        			flipper.addView(dayview);
+        			
+        			flipper.setDisplayedChild(1);
+        		}
+        		else
+        		{
+        			
+        
+        			flipper.setDisplayedChild(0);
+        			flipper.removeViewAt(1);
+
+        		}
+            }
+            
+		});
+		
+		
+		
+		info =  new TextView(context);
+		//info.setText("Information");
+		info.setTextSize((float) 10.0);
+		
+		note =  new TextView(context);
+		note.setTextSize((float) 6.0);
+
+		//note.setText("Reminder");
+		
+		this.setOrientation(LinearLayout.VERTICAL);
+		this.addView(date);this.addView(info);this.addView(note);
+		
+	}
+
+	public CalendarCell(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		// TODO Auto-generated constructor stub
+	}
+
+	public CalendarCell(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+		// TODO Auto-generated constructor stub
+	}
+	
+	public TextView GetDateView()
+	{
+		return date;
+	}
+	public TextView GetInfoView()
+	{
+		return info;
+	}
+	public TextView GetNoteView()
+	{
+		return note;
+	}
+	public void SetCellNo(int num)
+	{
+		cell_no = num;
+	}
+	
+	public int GetCellNo()
+	{
+		return cell_no;
+	}
+
+
+	public void onClick(View v) {
+	
+		ViewFlipper flipper = KCalFragment.getFlipper();
+		if (0 == flipper.getDisplayedChild())
+		{
+		
+			//flipper.removeViewAt(1);
+			flipper.addView(v);
+			flipper.setDisplayedChild(1);
+		}
+		else
+		{
+			
+			
+			flipper.setDisplayedChild(0);
+			flipper.removeViewAt(1);
+
+		}
+	}
+	
+	
+	public static View GetCellViewRoot()
+	{
+		LayoutInflater inflater = (LayoutInflater)getContext().getSystemService
+			      (Context.LAYOUT_INFLATER_SERVICE);
+		View dayview = inflater.inflate(R.layout.dayview,null);
+		return dayview;
+	}
+	
+	public
+	TextView date;
+	TextView info;
+	TextView note;
+	int	     cell_no;
+	MainPage	m_page;
+}

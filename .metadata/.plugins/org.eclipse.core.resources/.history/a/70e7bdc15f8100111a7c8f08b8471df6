@@ -1,0 +1,17 @@
+package kashmiri.calendar.namespace;
+
+public class KCalendarManager {
+	
+	public void LoadCalendarData()
+	{}
+	
+	public void SetCurrentMonth(int currMonth)
+	{}
+	
+	public void SetCalendar(CalendarWidget cal)
+	{}
+	
+	CalendarWidget calendar;
+	int				CurrentView;
+
+}

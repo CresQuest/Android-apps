@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:id="@+id/add_reminder"
+      android:layout_width="match_parent"
+      android:layout_height="fill_parent"
+      android:background="@drawable/addreminder_bg"
+      android:orientation="vertical" >
+
+       <TextView
+                  android:id="@+id/labelReminderHeading"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content" 
+                  android:text="Reminder details:"/>
+      <TableLayout
+          android:id="@+id/tableLayoutReminder"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight="0.35" >
+
+          <TableRow
+              android:id="@+id/tableRow1"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content" >
+
+              <TextView
+                  android:id="@+id/labelReminder"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content" 
+                  android:text="Reminder:"/>
+			<EditText
+                  android:id="@+id/editReminder"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content" 
+                  />
+
+          </TableRow>
+
+          <TableRow
+              android:id="@+id/tableRow2"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:visibility="gone" >
+          	<TextView
+                  android:id="@+id/labelReminderdescription"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content" 
+                  android:text="Reminder Description:"/>
+			<EditText
+                  android:id="@+id/editReminderdescription"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content" 
+                  />
+          
+          </TableRow>
+
+          <TableRow
+              android:id="@+id/tableRow3"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content" >
+				<TextView
+                  android:id="@+id/labelReminderTime"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content" 
+                  android:text="Remind before"/>
+				<Spinner 
+        			android:id="@+id/spinner"
+        			android:layout_width="fill_parent"
+        			android:layout_height="wrap_content"
+        			android:prompt="@string/numbers"
+    			/>
+				
+              <TextView
+                  android:id="@+id/labeldaystext"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content" 
+                  android:text="Day(s):"/>
+		
+          </TableRow>
+
+          <TableRow
+              android:id="@+id/tableRow4"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content" >
+				
+              <Button
+                  android:id="@+id/buttonOK"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content" 
+                  android:text="Done"/>
+                   <Button
+                  android:id="@+id/buttonCancel"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content" 
+                  android:text="Cancel"/>
+	
+          </TableRow>
+
+      </TableLayout>
+
+  </LinearLayout>

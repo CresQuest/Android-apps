@@ -1,0 +1,158 @@
+/**
+ * 
+ */
+package kashmiri.calendar.namespace;
+
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RectShape;
+import android.graphics.drawable.shapes.Shape;
+import android.util.AttributeSet;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
+
+/**
+ * @author ikhit02
+ *
+ */
+public class CalendarWidget extends TableLayout 
+ {
+
+	/**
+	 * @param context
+	 */
+	public CalendarWidget(Context context, MainPage page) {
+		super(context);
+		
+		m_page = page;
+		setupUI(context);
+	}
+
+	/**
+	 * @param context
+	 * @param attrs
+	 */
+	public CalendarWidget(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		setupUI(context);
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @param context
+	 * @param attrs
+	 * @param defStyle
+	 */
+	public CalendarWidget(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs);
+		setupUI(context);
+		// TODO Auto-generated constructor stub
+	}
+	public void setupUI(Context context){
+		
+		setBackgroundResource(R.drawable.pattern);
+		
+		
+		//1. Setup cells of dimension 5x7
+		//2. Each cell is a vertical layout if three text views.
+		setLayoutParams(new LayoutParams(
+                LayoutParams.WRAP_CONTENT,
+                LayoutParams.WRAP_CONTENT));
+		cell = new CalendarCell[40];
+		for (int k = 0; k < 40;++k)
+		{
+			cell[k] = new CalendarCell(context, m_page);
+			
+			 
+		}
+		TableRow trHeader = new TableRow(context);
+		
+
+		for(int j = 0; j < 7; ++j)
+		{
+	
+			String[] Header = {"MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"};
+			TextView view = new TextView(context);
+			view.setText(Header[j]);
+			view.setTextColor(Color.YELLOW);
+			view.setTextSize((float) 16.0);
+			view.setTypeface(null, 1);
+			view.setPadding(15, 0, 0, 0);
+			
+			trHeader.addView(view);
+		}
+		
+		this.addView(trHeader);
+		
+		for(int i = 0; i < 5; ++i)
+		{
+			TableRow tr = new TableRow(context);
+		
+            tr.setLayoutParams(new LayoutParams(
+                           LayoutParams.FILL_PARENT,
+                           LayoutParams.WRAP_CONTENT));
+			for(int j = 0; j < 7; ++j)
+			{
+		
+				int num = i*7+j +1;
+				cell[num - 1].SetCellNo(num);
+				String Date = "" + num;
+				cell[num - 1].date.setText(Date);
+				tr.addView(cell[num - 1]);
+			}
+			
+			this.addView(tr);
+			
+		}
+		
+		TableRow footer = new TableRow(context);
+		for(int j = 0; j < 7; ++j)
+		{
+	
+			String[] Header = {"MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"};
+			TextView view = new TextView(context);
+			view.setText(Header[j]);
+			view.setTextColor(Color.YELLOW);
+			view.setTextSize((float) 16.0);
+			view.setTypeface(null, 1);
+			view.setPadding(15, 0, 0, 0);
+			
+			footer.addView(view);
+		}
+		this.addView(footer);
+		//m_page.mgr.setBitmap(this);
+	}
+	
+	public void SetCellInfo(String id, int num, String date, String info, String note)
+	{
+		
+		if(!note.isEmpty())
+		{
+			cell[num].date.setTextColor(Color.RED);
+			//cell[num].info.setTextColor(Color.GREEN);
+			cell[num].note.setTextColor(Color.GREEN);
+			cell[num].note.setText(note);
+			
+		}
+		cell[num].id_no = id;
+		//cell[num].info.setText(info);
+		cell[num].date.setText(date);
+		if(num%2 == 0)
+		{
+			cell[num].setBackgroundColor(R.color.transparent_yellow);
+		}
+		else
+		{
+			cell[num].setBackgroundColor(R.color.transparent_blue);
+		}
+	}
+	CalendarCell[] cell;
+	MainPage		m_page;
+
+}

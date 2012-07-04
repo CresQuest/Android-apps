@@ -1,0 +1,21 @@
+C:\PROGRA~1\GnuWin32\bin\make.exe all 
+D:/Projects/CMake/bin/cmake.exe -HD:/Projects/VES -BD:/Projects/b4 --check-build-system CMakeFiles/Makefile.cmake 0
+D:/Projects/CMake/bin/cmake.exe -E cmake_progress_start D:/Projects/b4/CMakeFiles D:/Projects/b4/CMakeFiles/progress.marks
+C:/PROGRA~1/GnuWin32/bin/make -f CMakeFiles/Makefile2 all
+make[1]: Entering directory `D:/Projects/b4'
+C:/PROGRA~1/GnuWin32/bin/make -f src/ves/CMakeFiles/ves.dir/build.make src/ves/CMakeFiles/ves.dir/depend
+make[2]: Entering directory `D:/Projects/b4'
+D:/Projects/CMake/bin/cmake.exe -E cmake_depends "Unix Makefiles" D:/Projects/VES D:/Projects/VES/src/ves D:/Projects/b4 D:/Projects/b4/src/ves D:/Projects/b4/src/ves/CMakeFiles/ves.dir/DependInfo.cmake --color=
+Scanning dependencies of target ves
+make[2]: Leaving directory `D:/Projects/b4'
+C:/PROGRA~1/GnuWin32/bin/make -f src/ves/CMakeFiles/ves.dir/build.make src/ves/CMakeFiles/ves.dir/build
+make[2]: Entering directory `D:/Projects/b4'
+D:/Projects/CMake/bin/cmake.exe -E cmake_progress_report D:/Projects/b4/CMakeFiles 1
+[  2%] Building CXX object src/ves/CMakeFiles/ves.dir/vesActor.cpp.o
+cd D:/Projects/b4/src/ves && D:/Projects/Android/Downloads/android-ndk-r6b-windows/android-ndk-r6b/toolchains/arm-linux-androideabi-4.4.3/prebuilt/windows/bin/arm-linux-androideabi-g++.exe   -DANDROID --sysroot=D:/Projects/Android/Downloads/android-ndk-r6b-windows/android-ndk-r6b/platforms/android-8/arch-arm/ -fPIC -DANDROID -Wno-psabi -fsigned-char -mthumb -march=armv7-a -mfloat-abi=softfp -ID:/Projects/Android/Downloads/android-ndk-r6b-windows/android-ndk-r6b/sources/cxx-stl/gnu-libstdc++/include -ID:/Projects/Android/Downloads/android-ndk-r6b-windows/android-ndk-r6b/sources/cxx-stl/gnu-libstdc++/libs/armeabi-v7a/include -ID:/Projects/VES/src -ID:/Projects/VES/src/./. -ID:/Projects/VES/src/ves/. -ID:/Projects/b4/src/ves/. -ID:/Projects/b4/src/shaders/.    -o CMakeFiles/ves.dir/vesActor.cpp.o -c D:/Projects/VES/src/ves/vesActor.cpp
+The system cannot find the path specified.
+make[2]: Leaving directory `D:/Projects/b4'
+make[2]: *** [src/ves/CMakeFiles/ves.dir/vesActor.cpp.o] Error 1
+make[1]: Leaving directory `D:/Projects/b4'
+make[1]: *** [src/ves/CMakeFiles/ves.dir/all] Error 2
+make: *** [all] Error 2

@@ -1,0 +1,10 @@
+package com.example.android.BluetoothChat;
+
+import java.util.TimerTask;
+
+
+class SensorTimerTask extends TimerTask {
+	   public void run() {
+	    
+	   }
+	}

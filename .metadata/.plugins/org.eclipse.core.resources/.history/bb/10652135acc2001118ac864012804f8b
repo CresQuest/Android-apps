@@ -1,0 +1,307 @@
+package kashmiri.calendar.namespace;
+
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+import kashmiri.calendar.namespace.data.DayView;
+
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.NinePatchDrawable;
+import android.telephony.CellLocation;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
+import android.widget.TableLayout;
+import android.widget.TextView;
+import android.widget.ViewFlipper;
+
+public class CalendarCell extends LinearLayout implements View.OnClickListener{
+
+	static EditText reminder_name;
+	static EditText reminder_desc;
+	
+	static View dayview;
+	static TextView dayview_date;
+	static TextView dayview_info;
+	static TextView dayview_reminder;
+	static TextView dayview_month;
+	public  static String		 day_no;// current displayed id
+	static Spinner reminder_before;
+	public static Context m_context;
+	
+	public CalendarCell(Context context, MainPage page) {
+		super(context);
+		m_page = page;
+		m_context = context;
+		
+		
+		this.setPadding(15, 0, 0, 0);
+		
+		
+		date =  new TextView(context);
+		date.setTextSize((float) 36.0);
+		
+		this.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	if(date.getText()== "") 
+            		return;
+            	CalendarCell.day_no = id_no;
+            	ViewFlipper flipper = KCalFragment.getFlipper();
+        		if (0 == flipper.getDisplayedChild())
+        		{
+        		
+        			CalendarCell.dayview = GetCellViewRoot(getContext());
+        			
+        			CalendarCell.dayview_date = (TextView)dayview.findViewById(R.id.dayview_date);
+        			CalendarCell.dayview_info = (TextView)dayview.findViewById(R.id.dayview_info);
+        			CalendarCell.dayview_reminder = (TextView)dayview.findViewById(R.id.dayview_reminder);
+        			CalendarCell.dayview_month = (TextView)dayview.findViewById(R.id.dayview_month);
+        			Button dayview_addreminder = (Button)dayview.findViewById(R.id.dayview_addreminder);
+        			dayview_addreminder.setBackgroundColor(R.color.transparent_gray);
+        			//dayview_addreminder.setBackgroundResource(R.drawable.reminder);
+        			dayview_addreminder.setOnClickListener(new View.OnClickListener() {
+						
+						public void onClick(View v) {
+							
+		        			//set adapter for spinner
+							View addreminder = GetCellReminderViewRoot(KCalendarActivity.m_app_activity);
+		        			CalendarCell.reminder_before = (Spinner) addreminder.findViewById(R.id.spinner);
+		        			ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(KCalendarActivity.m_app_activity
+		        					, R.array.numbers, android.R.layout.simple_spinner_item);
+		        			List<String> list = new ArrayList<String>();
+		        				        			
+		        			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		        		    
+		        		    CalendarCell.reminder_before.setAdapter(adapter);
+		
+		        		    
+		        		    CalendarCell.reminder_name = (EditText)addreminder.findViewById(R.id.editReminder);
+		        		    CalendarCell.reminder_desc = (EditText)addreminder.findViewById(R.id.editReminderdescription);
+		        		   
+		        			ViewFlipper flipper = KCalFragment.getFlipper();
+		        			flipper.addView(addreminder);
+		        			//flipper.addView(reminder_before);
+		        			flipper.showNext();
+		        			
+		        			Button ok = (Button)addreminder.findViewById(R.id.buttonOK);	
+		        			ok.setOnClickListener(new View.OnClickListener() {
+								
+								public void onClick(View v) {
+									
+									ViewFlipper flipper = KCalFragment.getFlipper();
+				        			flipper.showPrevious();
+				        						
+				        			KCalendarManager mgr = m_page.mgr;
+				        			mgr.SetReminder(CalendarCell.dayview_date.getText().toString(),CalendarCell.reminder_name.getText().toString(), CalendarCell.reminder_desc.getText().toString(),CalendarCell.reminder_before.getSelectedItem().toString());
+				        		
+				        			flipper.removeViewAt(2);
+									
+								}
+							});
+		        			Button cancel = (Button)addreminder.findViewById(R.id.buttonCancel);
+		        			cancel.setOnClickListener(new View.OnClickListener() {
+								
+								public void onClick(View v) {
+									
+									ViewFlipper flipper = KCalFragment.getFlipper();
+				        			flipper.showPrevious();
+				        			flipper.removeViewAt(2);
+								}
+							});
+						}
+					});
+        			
+        			Button back = (Button)dayview.findViewById(R.id.dayview_back);
+        			back.setBackgroundColor(R.color.transparent_blue);
+        			back.setOnClickListener(new View.OnClickListener() {
+						
+						public void onClick(View v) {
+							ViewFlipper flipper = KCalFragment.getFlipper();
+							flipper.setDisplayedChild(0);
+		        			flipper.removeViewAt(1);
+							
+						}
+					});
+        			
+        			Button navigate_back = (Button)dayview.findViewById(R.id.prev_day);
+        			navigate_back.setOnClickListener(new View.OnClickListener() {
+						
+						public void onClick(View v) {
+							int id = Integer.parseInt(day_no) - 1;
+							if(id < 0)
+								return;
+							DayView day = (DayView) m_page.mgr.vectDayView.elementAt(id);
+							CalendarCell.dayview_date.setText(day.date);
+							CalendarCell.dayview_info.setText(day.tithi);
+							//note.setText(day.festival);
+							CalendarCell.day_no = String.valueOf(id);
+							dayview_reminder.setText(day.festival);
+							dayview_month.setText(day.month);
+							KCalendarManager.setBitmap(dayview,day.month);
+							
+						}
+					});
+        			
+        			Button navigate_forward = (Button)dayview.findViewById(R.id.next_day);
+        			navigate_forward.setOnClickListener(new View.OnClickListener() {
+						
+						public void onClick(View v) {
+							int id = Integer.parseInt(day_no) + 1;
+							if(id > 384)
+								return;
+							DayView day = (DayView) m_page.mgr.vectDayView.elementAt(id);
+							CalendarCell.dayview_date.setText(day.date);
+							CalendarCell.dayview_info.setText(day.tithi);
+							//note.setText(day.festival);
+							CalendarCell.day_no = String.valueOf(id);
+							CalendarCell.dayview_reminder.setText(day.festival);
+							KCalendarManager.setBitmap(dayview,day.month);
+							
+						}
+					});
+        			
+        			
+        			
+        			int id = Integer.parseInt(day_no);
+					DayView day = (DayView) m_page.mgr.vectDayView.elementAt(id);
+					CalendarCell.dayview_date.setText(day.date);
+					CalendarCell.dayview_info.setText(day.tithi);
+					//note.setText(day.festival);
+					CalendarCell.day_no = String.valueOf(id);
+					CalendarCell.dayview_reminder.setText(day.festival);
+					KCalendarManager.setBitmap(dayview,day.month);
+        			
+        			flipper.addView(dayview);
+        			
+        			flipper.setDisplayedChild(1);
+        		}
+        		else
+        		{
+        			
+        
+        			flipper.setDisplayedChild(0);
+        			flipper.removeViewAt(1);
+
+        		}
+            }
+            
+		});
+		
+		
+		
+		info =  new TextView(context);
+		//info.setText("Information");
+		info.setTextSize((float) 10.0);
+		
+		note =  new TextView(context);
+		note.setTextSize((float) 16.0);
+
+		//note.setText("Reminder");
+		this.setOrientation(LinearLayout.VERTICAL);
+		
+		//this.setLayoutParams(new LinearLayout.LayoutParams(164,164));
+		this.addView(date,new LinearLayout.LayoutParams(64,64));
+		this.addView(info,new LinearLayout.LayoutParams(1,1));
+		this.addView(note,new LinearLayout.LayoutParams(64,64));
+		
+		
+		
+	}
+
+	public CalendarCell(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		// TODO Auto-generated constructor stub
+	}
+
+	public CalendarCell(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+		// TODO Auto-generated constructor stub
+	}
+	
+	public TextView GetDateView()
+	{
+		return date;
+	}
+	public TextView GetInfoView()
+	{
+		return info;
+	}
+	public TextView GetNoteView()
+	{
+		return note;
+	}
+	public void SetCellNo(int num)
+	{
+		cell_no = num;
+	}
+	
+	public int GetCellNo()
+	{
+		return cell_no;
+	}
+
+	public void ClearCell()
+	{
+		date.setText("");
+		info.setText("");
+		note.setText("");
+		date.setTextColor(Color.RED);
+		note.setTextColor(Color.BLACK);
+	}
+
+	public void onClick(View v) {
+	
+		ViewFlipper flipper = KCalFragment.getFlipper();
+		if (0 == flipper.getDisplayedChild())
+		{
+		
+			//flipper.removeViewAt(1);
+			flipper.addView(v);
+			flipper.setDisplayedChild(1);
+		}
+		else
+		{
+			
+			
+			flipper.setDisplayedChild(0);
+			flipper.removeViewAt(1);
+
+		}
+	}
+	
+	
+	public static View GetCellViewRoot(Context con)
+	{
+		LayoutInflater inflater = (LayoutInflater)con.getSystemService
+			      (Context.LAYOUT_INFLATER_SERVICE);
+		View dayview = inflater.inflate(R.layout.dayview,null);
+		return dayview;
+	}
+	
+	public static View GetCellReminderViewRoot(Context con)
+	{
+		LayoutInflater inflater = (LayoutInflater)con.getSystemService
+			      (Context.LAYOUT_INFLATER_SERVICE);
+		View addreminder = inflater.inflate(R.layout.add_reminder,null);
+		return addreminder;
+	}
+	
+
+	public
+	TextView date;
+	TextView info;
+	TextView note;
+	int	     cell_no;
+	String	 id_no;
+	
+	MainPage	m_page;
+}

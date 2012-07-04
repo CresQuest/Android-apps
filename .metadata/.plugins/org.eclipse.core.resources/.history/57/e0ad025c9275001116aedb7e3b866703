@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Welcome to Stryker Smart Tracker</string>
+    <string name="app_name">Tracker App</string>
+    <string name="SMART_TRACKER">Stryker Smart Tracker Technology</string>
+    <string name="X">XXX</string>
+    <string name="Y">Y</string>
+    <string name="Z">Z</string>
+    <string name="ZERO">0</string>
+
+</resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout
+	android:id="@+id/widget0"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:background="#ff999999"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+<TextView
+	android:id="@+id/text_view"
+	android:layout_width="71px"
+	android:layout_height="25px"
+	android:text="TextView"
+	android:textStyle="bold"
+	android:textColor="#ff999999"
+	android:gravity="center"
+	android:layout_x="123dp"
+	android:layout_y="158dp" />
+</AbsoluteLayout>
+

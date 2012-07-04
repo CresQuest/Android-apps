@@ -1,0 +1,67 @@
+package kashmiri.calendar.namespace;
+
+import java.util.Vector;
+
+import kashmiri.calendar.namespace.data.KReminderData;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.HorizontalScrollView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+
+public class KFeedbackFragment extends DialogFragment{
+    static KRemindersFragment newInstance() {
+        return new KRemindersFragment();
+    }
+    
+    
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+    	
+    	
+    	vector = new Vector<KReminderData>();
+    	//Get the main page.. [HACK]... The main page is the first child of the flipper
+    	MainPage main_page = (MainPage)KCalFragment.getFlipper().getChildAt(0);
+    	main_page.mgr.LoadDataBase(getActivity().getApplicationContext());
+    	Cursor cur = main_page.mgr.database_handler.getAllReminders();
+    	
+    	
+    	//m_adapter = new KRemindersAdapter(getActivity().getApplicationContext(), cur);
+    	//View first = m_adapter.getView(0, null, null);
+    	//int count = cur.getCount();
+    	//int count1 = m_adapter.getCount();
+    	main_page.mgr.CloseDataBase(getActivity().getApplicationContext());
+
+    	//View v = KStyleItems.GetTableReminder(getActivity().getApplicationContext());
+    	m_reminderTable = (LinearLayout)KStyleItems.GetTableReminder(getActivity().getApplicationContext());
+    	//m_reminderTable = new LinearLayout(getActivity().getApplicationContext());
+    	//m_reminderTable.setOrientation(LinearLayout.VERTICAL);
+    	//m_reminderTable.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.WRAP_CONTENT));
+    	ScrollView v = new ScrollView(getActivity().getApplicationContext());
+		v.setFillViewport(true);
+		HorizontalScrollView rem_container = new HorizontalScrollView(getActivity().getApplicationContext());
+		rem_container.setFillViewport(true);
+		refreshTable(cur);
+    	cur.close();
+    	rem_container.addView(m_reminderTable);
+    	v.addView(rem_container);
+    	return v;
+    	
+    	
+	    
+    }
+    
+ 
+    KRemindersAdapter m_adapter;
+    LinearLayout	m_reminderTable;
+    Button 			m_DeleteReminders;
+    Vector 			vector;
+
+}

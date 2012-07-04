@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete element from project &apos;HATApp&apos;&#x0D;&#x0A;- Original project: &apos;HATApp&apos;&#x0D;&#x0A;- Original element: &apos;HATApp/gen/hat.stryker.namespace&apos;" description="Delete element" element1="/gen&lt;hat.stryker.namespace" element2="/gen&lt;hat.stryker" element3="/gen&lt;hat" elements="3" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1335765602153" subPackages="false" version="1.0"/>
+</session>

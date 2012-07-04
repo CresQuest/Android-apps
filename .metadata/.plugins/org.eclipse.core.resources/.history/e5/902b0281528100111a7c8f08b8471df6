@@ -1,0 +1,62 @@
+package kashmiri.calendar.namespace;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+public class CalendarCell extends LinearLayout {
+
+	public CalendarCell(Context context) {
+		super(context);
+		// TODO Auto-generated constructor stub
+		
+		date =  new TextView(context);
+		info =  new TextView(context);
+		note =  new TextView(context);
+		this.setOrientation(LinearLayout.VERTICAL);
+		this.addView(date);this.addView(info);this.addView(note);
+		
+	}
+
+	public CalendarCell(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		// TODO Auto-generated constructor stub
+	}
+
+	public CalendarCell(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+		// TODO Auto-generated constructor stub
+	}
+	
+	public TextView GetDateView()
+	{
+		return date;
+	}
+	public TextView GetInfoView()
+	{
+		return info;
+	}
+	public TextView GetNoteView()
+	{
+		return note;
+	}
+	public void SetCellNo(int num)
+	{
+		cell_no = num;
+	}
+	
+	public int GetCellNo()
+	{
+		return cell_no;
+	}
+
+public
+	TextView date;
+	TextView info;
+	TextView note;
+	int	     cell_no;
+	
+	
+}

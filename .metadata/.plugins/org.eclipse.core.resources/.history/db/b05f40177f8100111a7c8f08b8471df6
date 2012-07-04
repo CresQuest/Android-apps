@@ -1,0 +1,28 @@
+package kashmiri.calendar.namespace;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+
+public class KCalendarManager {
+	
+	public void LoadCalendarData(Context context)
+	{
+		database_handler = new DatabaseHandler(context);
+	}
+	
+	public void SetCurrentMonth(int currMonth)
+	{
+		CurrentMonth = currMonth;
+	}
+	
+	public void SetCalendar(CalendarWidget cal)
+	{
+		
+		calendar = cal;
+	}
+	
+	CalendarWidget calendar;
+	int				CurrentMonth;
+	DatabaseHandler	database_handler;
+
+}

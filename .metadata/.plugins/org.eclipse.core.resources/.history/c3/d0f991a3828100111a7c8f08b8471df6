@@ -1,0 +1,61 @@
+package kashmiri.calendar.namespace;
+
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+public class KCalendarManager {
+	
+	public KCalendarManager(Context context)
+	{
+		LoadCalendarData(context);
+		SetCurrentMonth(1);
+		
+	}
+	public void LoadCalendarData(Context context)
+	{
+		database_handler = new DatabaseHandler(context);
+	}
+	
+	public void SetCurrentMonth(int currMonth)
+	{
+		CurrentMonth = currMonth;
+	}
+	
+	public void SetCalendar(CalendarWidget cal)
+	{
+		
+		calendar = cal;
+	}
+	
+	public void UpdateCalendar(int currMonth)
+	{
+		Cursor cursor = database_handler.getMonthInformation(currMonth);
+		String[] Days = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"}; 
+		
+		if (cursor.moveToFirst()) {
+			for (int n = 0; n < Days.length; n++)
+			{
+				if (Days[n].equals(cursor.getString(1)))
+					strStartDay = n;
+				break;
+			}
+		}
+		int count = strStartDay;
+		if (cursor.moveToFirst()) {
+           do {
+        	   String info = cursor.getString(2);
+        	   String note = cursor.getString(3);
+        	   //Start populating the calendar
+        	   calendar.SetCellInfo(count,info,note);
+        	   count++;
+           } while (cursor.moveToNext());
+       }
+	}
+	
+	CalendarWidget calendar;
+	int				CurrentMonth;
+	DatabaseHandler	database_handler;
+	int				strStartDay;
+
+}

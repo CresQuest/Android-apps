@@ -1,0 +1,162 @@
+package test.opengl.namespace;
+
+import android.app.Activity;
+import android.os.Bundle;
+
+import android.app.Activity;
+import android.content.Context;
+import android.opengl.GLSurfaceView;
+import android.os.Bundle;
+import android.view.MotionEvent;
+import android.widget.TextView;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+public class OpenGLActivity extends Activity implements SensorEventListener{
+  
+    private GLSurfaceView mGLView;
+    private boolean mInitialized;
+
+    private SensorManager mSensorManager;
+    
+    private float mLastX, mLastY, mLastZ;
+    private Sensor mAccelerometer;
+
+  
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        
+        // Create a GLSurfaceView instance and set it
+        // as the ContentView for this Activity.
+        mGLView = new HelloOpenGLES10SurfaceView(this);
+        //setContentView(mGLView);
+        setContentView(R.layout.main);
+        
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+
+    }
+    
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // The following call pauses the rendering thread.
+        // If your OpenGL application is memory intensive,
+        // you should consider de-allocating objects that
+        // consume significant memory here.
+        mGLView.onPause();
+        mSensorManager.unregisterListener(this);
+    }
+    
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // The following call resumes a paused rendering thread.
+        // If you de-allocated graphic objects for onPause()
+        // this is a good place to re-allocate them.
+        mGLView.onResume();
+        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+	public void onAccuracyChanged(Sensor arg0, int arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void onSensorChanged(SensorEvent event) {
+		// TODO Auto-generated method stub
+		TextView tvX= (TextView)findViewById(R.id.x_val);
+		TextView tvY= (TextView)findViewById(R.id.y_val);
+		TextView tvZ= (TextView)findViewById(R.id.z_val);
+		
+		float x = event.values[0];
+		float y = event.values[1];
+		float z = event.values[2];
+		if (!mInitialized) {
+		mLastX = x;
+		mLastY = y;
+		mLastZ = z;
+		tvX.setText("0.0");
+		tvY.setText("0.0");
+		tvZ.setText("0.0");
+		mInitialized = true;
+		} else {
+		float deltaX = Math.abs(mLastX - x);
+		float deltaY = Math.abs(mLastY - y);
+		float deltaZ = Math.abs(mLastZ - z);
+		if (deltaX < NOISE) deltaX = (float)0.0;
+		if (deltaY < NOISE) deltaY = (float)0.0;
+		if (deltaZ < NOISE) deltaZ = (float)0.0;
+		mLastX = x;
+		mLastY = y;
+		mLastZ = z;
+		tvX.setText(Float.toString(deltaX));
+		tvY.setText(Float.toString(deltaY));
+		tvZ.setText(Float.toString(deltaZ));
+		iv.setVisibility(View.VISIBLE);
+		if (deltaX > deltaY) {
+		iv.setImageResource(R.drawable.horizontal);
+		} else if (deltaY > deltaX) {
+		iv.setImageResource(R.drawable.vertical);
+		} else {
+		iv.setVisibility(View.INVISIBLE);
+		}
+		}
+	}
+}
+  
+class HelloOpenGLES10SurfaceView extends GLSurfaceView {
+	
+	 @Override 
+	    public boolean onTouchEvent(MotionEvent e) {
+	        // MotionEvent reports input details from the touch screen
+	        // and other input controls. In this case, you are only
+	        // interested in events where the touch position changed.
+
+	        float x = e.getX();
+	        float y = e.getY();
+	        
+	        switch (e.getAction()) {
+	            case MotionEvent.ACTION_MOVE:
+	    
+	                float dx = x - mPreviousX;
+	                float dy = y - mPreviousY;
+	    
+	                // reverse direction of rotation above the mid-line
+	                if (y > getHeight() / 2) {
+	                  dx = dx * -1 ;
+	                }
+	    
+	                // reverse direction of rotation to left of the mid-line
+	                if (x < getWidth() / 2) {
+	                  dy = dy * -1 ;
+	                }
+	              
+	                mRenderer.mAngle += (dx + dy) * TOUCH_SCALE_FACTOR;
+	                requestRender();
+	        }
+
+	        mPreviousX = x;
+	        mPreviousY = y;
+	        return true;
+	    } 
+
+    public HelloOpenGLES10SurfaceView(Context context){
+        super(context);
+        
+        // Set the Renderer for drawing on the GLSurfaceView
+        mRenderer = new HelloOpenGLES10Renderer();
+        setRenderer(mRenderer);
+        // Render the view only when there is a change
+        setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
+    }
+    private final float TOUCH_SCALE_FACTOR = 180.0f / 320;
+    private HelloOpenGLES10Renderer mRenderer;
+    private float mPreviousX;
+    private float mPreviousY;
+
+
+}

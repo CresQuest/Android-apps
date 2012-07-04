@@ -1,0 +1,90 @@
+package kashmiri.calendar.namespace;
+
+import java.io.IOException;
+import java.security.KeyRep;
+
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+
+public class KCalendarManager {
+	
+	public KCalendarManager(Context context, CalendarWidget cal)
+	{
+		calendar = cal;
+		LoadCalendarData(context);
+		SetCurrentMonth(0);
+		UpdateCalendar(0);
+	}
+	public void LoadCalendarData(Context context)
+	{
+		database_handler = new DatabaseHandler(context);
+		try {
+			database_handler.createDataBase();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void SetCurrentMonth(int currMonth)
+	{
+		CurrentMonth = currMonth;
+	}
+	
+	public int GetCurrentMonth()
+	{
+		return CurrentMonth;
+	}
+	
+	
+	public void SetCalendar(CalendarWidget cal)
+	{
+		
+		calendar = cal;
+	}
+	
+	public void UpdateCalendar(int currMonth)
+	{
+		Cursor cursor = database_handler.getMonthInformation(currMonth);
+		String[] Days = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"}; 
+		
+		if (cursor.moveToFirst()) {
+			for (int n = 0; n < Days.length; n++)
+			{
+				if (Days[n].equals(cursor.getString(1)))
+					strStartDay = n;
+				break;
+			}
+		}
+		int count = strStartDay;
+		if (cursor.moveToFirst()) {
+           do {
+        	   String info = cursor.getString(3);
+        	   String note = cursor.getString(4);
+        	   //Start populating the calendar
+        	   calendar.SetCellInfo(count,info,note);
+        	   count++;
+           } while (cursor.moveToNext());
+       }
+		cursor.close();
+	}
+	
+	public void SetReminder(String date, String ReminderName, String ReminderDescription, int daysbefore)
+	{
+		//1. Insert into the database.
+		//2. Setup an alarm in the phone.
+		Bundle _bundle = new Bundle();
+		_bundle.putString("REMINDER_NAME", ReminderName);
+		KCalReminders reminder = new KCalReminders(_context, )
+	}
+	
+	
+	CalendarWidget calendar;
+	int				CurrentMonth;
+	DatabaseHandler	database_handler;
+	int				strStartDay;
+	Context			_context;
+
+}

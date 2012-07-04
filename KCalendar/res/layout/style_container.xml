@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout
+	android:id="@+id/widget33"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+<TextView
+	android:id="@+id/normal_text"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:background="#ff3333ff"
+	android:textSize="22sp"
+	android:typeface="sans"
+	android:textStyle="bold"
+	android:layout_y="89dp"
+	 />
+<LinearLayout
+	android:id="@+id/cell_layout"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:background="#fffbff71"
+	android:orientation="vertical"
+	android:layout_x="148dp"
+	android:layout_y="146dp"
+	>
+</LinearLayout>
+<TableLayout
+	android:id="@+id/table_reminder"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:background="#fffb95ff"
+	android:orientation="vertical"
+	android:layout_x="11dp"
+	android:layout_y="200dp"
+	>
+	</TableLayout>
+<TableRow
+	android:id="@+id/table_row_normal"
+	android:layout_width="320px"
+	android:layout_height="wrap_content"
+	android:background="#ff48bd3a"
+	android:orientation="horizontal"
+	android:layout_x="0dp"
+	android:layout_y="243dp">
+</TableRow>
+
+</AbsoluteLayout>

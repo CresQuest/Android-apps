@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="word_bar">#FF0000</color>
+    <color name="number_bar">#00FF00</color>
+    <color name="darkblue">#ff3300ff</color><color name="transparent_blue">#883300ff</color>
+    <color name="yellow">#ffffff33</color>
+    <color name="pink">#ffffcccc</color>
+    <color name="black">#ff333333</color>
+    <color name="green_shade1">#ff009999</color>
+    <color name="green_shade2">#ff99ffcc</color>
+    <color name="transparent_yellow">#88ffff00</color>
+    <color name="lightblue">#ff00ccff</color>
+    <color name="transparent_gray">#88999999</color>
+    <color name="blueish">#3E6C8E</color>
+</resources>

@@ -1,0 +1,65 @@
+package kashmiri.calendar.namespace;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.view.View;
+import android.view.WindowManager;
+import android.view.KeyCharacterMap.KeyData;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.LinearLayout.LayoutParams;
+
+import com.adwhirl.AdWhirlManager;
+import com.adwhirl.AdWhirlTargeting;
+import com.google.ads.*;
+public class KCalendarActivity extends FragmentActivity  {
+    private static final String MY_AD_UNIT_ID = "KAdds";
+	/** Called when the activity is first created. */
+	static public Activity m_app_activity;
+	private AdView adView;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        
+       //DatabaseHandler.DeleteDatabase(this);
+       setContentView(R.layout.main);
+        _context = getApplicationContext();
+       // setContentView(updateUI());
+        m_app_activity = this;
+        AdWhirlManager.setConfigExpireTimeout(1000 * 60 * 5);
+        AdWhirlTargeting.setTestMode(false);  
+          
+    } 
+    static public Context _context;
+    private View updateUI()
+    {
+    	Spinner reminder_before = new Spinner(this);
+    	setTitle("Kashmiri Calendar 2012");
+    	setTitleColor(Color.GREEN);
+    	List<String> list = new ArrayList<String>();
+		list.add("1");
+		list.add("2");
+		list.add("3");
+		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getApplicationContext(),
+			android.R.layout.simple_spinner_item, list);
+		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		 
+		reminder_before.setAdapter(dataAdapter);
+		return reminder_before;
+    }
+    @Override
+    public void onDestroy() {
+      if (adView != null) {
+        adView.destroy();
+      }
+      super.onDestroy();
+    }
+    
+
+}

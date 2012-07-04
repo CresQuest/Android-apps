@@ -1,0 +1,38 @@
+package kashmiri.calendar.namespace;
+
+import java.util.Vector;
+
+import kashmiri.calendar.namespace.data.KReminderData;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.HorizontalScrollView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+
+public class KFeedbackFragment extends DialogFragment{
+    static KRemindersFragment newInstance() {
+        return new KRemindersFragment();
+    }
+    
+    
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+    	
+    	
+    	return inflater.inflate(R.layout.tab_feedback, null);
+    	
+    	
+	    
+    }
+    
+ 
+
+
+}

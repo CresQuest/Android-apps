@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="214dp"
+        android:alpha="0.2"
+        android:background="@drawable/ic_launcher"
+        android:layerType="none"
+        android:orientation="vertical" android:paddingTop="30">
+
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:alpha="1" android:text="@string/SMART_TRACKER" android:scaleX="2" android:scaleY="3" android:ellipsize="end"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.24"
+        android:text="@string/hello" />
+
+</LinearLayout>

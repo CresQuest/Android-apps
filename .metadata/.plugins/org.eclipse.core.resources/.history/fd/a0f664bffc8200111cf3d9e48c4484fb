@@ -1,0 +1,40 @@
+package test.db.namespace;
+
+import java.io.IOException;
+
+import android.app.Activity;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+
+public class TestDbActivity extends Activity {
+    /** Called when the activity is first created. */
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        DataBaseHelper myDbHelper = new DataBaseHelper(this);
+        myDbHelper = new DataBaseHelper(this);
+ 
+        try {
+ 
+        	myDbHelper.createDataBase();
+ 
+ 	} catch (IOException ioe) {
+ 
+ 		throw new Error("Unable to create database");
+ 
+ 	}
+        String dbname = myDbHelper.getDatabaseName();
+        SQLiteDatabase st = myDbHelper.getReadableDatabase();
+ 	try {
+ 
+ 		myDbHelper.openDataBase();
+ 
+ 	}catch(SQLException sqle){
+ 
+ 		throw sqle;
+ 
+ 	}
+        setContentView(R.layout.main);
+    }
+}

@@ -1,0 +1,57 @@
+package kashmiri.calendar.namespace;
+
+import java.util.Vector;
+
+import kashmiri.calendar.namespace.data.KReminderData;
+import android.content.Intent;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.HorizontalScrollView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.Toast;
+import android.widget.ViewFlipper;
+
+public class KFeedbackFragment extends DialogFragment{
+    static KRemindersFragment newInstance() {
+        return new KRemindersFragment();
+    }
+    
+    
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+    	
+    	
+    	View v =  inflater.inflate(R.layout.tab_feedback, null);
+    	Button send_feedback = (Button)v.findViewById(R.id.send_feedback);
+    	send_feedback.setOnClickListener(new View.OnClickListener() {
+			
+			public void onClick(View v) {
+				Intent i = new Intent(Intent.ACTION_SEND);
+				i.setType("text/plain");
+				i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"hiteshganjoo@gmail.com"});
+				i.putExtra(Intent.EXTRA_SUBJECT, "subject of email");
+				i.putExtra(Intent.EXTRA_TEXT   , "body of email");
+				try {
+				    startActivity(Intent.createChooser(i, "Send mail..."));
+				} catch (android.content.ActivityNotFoundException ex) {
+				    Toast.makeText(getActivity(), "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+				}
+			}
+		});
+    	return v;
+    	
+	    
+    }
+    
+ 
+
+
+}

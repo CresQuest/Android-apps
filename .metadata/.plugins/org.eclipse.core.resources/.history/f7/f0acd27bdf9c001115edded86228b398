@@ -1,0 +1,80 @@
+package kashmiri.calendar.namespace;
+
+
+
+	
+	import android.support.v4.app.DialogFragment;
+import android.database.Cursor;
+	import android.os.Bundle;
+	import android.view.LayoutInflater;
+	import android.view.View;
+	import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+	import android.widget.TextView;
+import android.widget.ViewFlipper;
+
+	public class KRemindersFragment extends DialogFragment {
+	    static KRemindersFragment newInstance() {
+	        return new KRemindersFragment();
+	    }
+	    
+	  
+	    @Override
+	    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	            Bundle savedInstanceState) {
+	    	
+	    	//Get the main page.. [HACK]... The main page is the first child of the flipper
+	    	MainPage main_page = (MainPage)KCalFragment.getFlipper().getChildAt(0);
+	    	main_page.mgr.LoadDataBase(getActivity().getApplicationContext());
+	    	Cursor cur = main_page.mgr.database_handler.getAllReminders();
+	    	
+	    	
+	    	//m_adapter = new KRemindersAdapter(getActivity().getApplicationContext(), cur);
+	    	//View first = m_adapter.getView(0, null, null);
+	    	//int count = cur.getCount();
+	    	//int count1 = m_adapter.getCount();
+	    	main_page.mgr.CloseDataBase(getActivity().getApplicationContext());
+	
+	    	View v = KStyleItems.GetTableReminder(getActivity().getApplicationContext());
+	    	m_reminderTable = (TableLayout) v.findViewById(R.id.reminder_table);
+	    	refreshTable(cur);
+	    	cur.close();
+	    	return v;
+	    	
+	    	
+		    
+	    }
+	    
+	    public void refreshTable(Cursor cur)
+	    {
+	    	int count = cur.getCount();
+	    	if(count < 1)
+	    		return;
+	    	if(m_reminderTable == null)
+	    		return;
+	    	//m_reminderTable.removeAllViewsInLayout();
+	    	cur.moveToFirst();
+	    	for(int i = 0;i < count; ++i)
+	    	{
+	    		TableRow row = new TableRow((getActivity().getApplicationContext()));
+	    	
+	    			TextView name = new TextView(getActivity().getApplicationContext());
+	    			name.setText(cur.getString(cur.getColumnIndex("name")));
+	    			TextView description = new TextView(getActivity().getApplicationContext());
+	    			description.setText(cur.getString(cur.getColumnIndex("description")));
+	    			TextView occurance = new TextView(getActivity().getApplicationContext());
+	    			occurance.setText(cur.getString(cur.getColumnIndex("occurance")));
+	    			
+	    			row.addView(name);
+	    			row.addView(description);
+	    			row.addView(occurance);
+	    			m_reminderTable.addView(row);
+	    			cur.moveToNext();
+	    	}
+	    }
+	    KRemindersAdapter m_adapter;
+	    TableLayout	m_reminderTable;
+	
+}

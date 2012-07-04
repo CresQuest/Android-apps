@@ -1,0 +1,153 @@
+package kashmiri.calendar.namespace;
+
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.HorizontalScrollView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.ViewFlipper;
+
+public class MainPage extends LinearLayout {
+
+	public MainPage(Context context) {
+		super(context);
+
+		
+		
+		
+		//Header options
+		this.setOrientation(LinearLayout.VERTICAL);
+		this.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.WRAP_CONTENT));
+
+		
+		Month = new TextView(context);
+		Month.setTextSize((float) 42.0);
+		Month.setTextColor(Color.DKGRAY);
+		LinearLayout header = new LinearLayout(context);
+		header.setOrientation(LinearLayout.HORIZONTAL);
+		
+
+		ScrollView v = new ScrollView(context);
+		v.setFillViewport(false);
+		HorizontalScrollView cal_container = new HorizontalScrollView(context);
+		v.addView(cal_container);
+		cal_container.setFillViewport(true);
+		CalendarWidget kCal = new CalendarWidget(context,this);
+		cal_container.addView(kCal);	
+		
+		RelativeLayout 		footer = new RelativeLayout(context);
+		footer.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
+        lp.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+
+        // Setting the parameters on the TextView
+        
+		
+		prev = new Button(context);
+		prev.setLayoutParams(lp);
+		
+		prev.setBackgroundResource(R.drawable.previous);
+		
+		footer.setBackgroundResource(R.drawable.month_bg);
+		footer.addView(prev);
+		
+		RelativeLayout.LayoutParams lp1 = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
+        lp1.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        
+        RelativeLayout.LayoutParams lp2 = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
+        lp2.addRule(RelativeLayout.CENTER_IN_PARENT);
+        Month.setLayoutParams(lp2);
+        
+		next = new Button(context);
+		next.setLayoutParams(lp1);
+		next.setBackgroundResource(R.drawable.next);
+		
+	
+		footer.addView(next);
+		footer.addView(Month);
+		
+		//this.addView(Month);
+		this.addView(footer);
+		this.addView(header);
+		this.addView(v);
+		
+		
+	
+		
+		mgr = new KCalendarManager(context, kCal);
+    	 String[] Months =  {"MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC","JAN", "FEB"};
+    	 
+    	 if(mgr.GetCurrentMonth() < 10)
+    		 Month.setText(Months[mgr.GetCurrentMonth()] + " 2012");
+    	 else
+    		 Month.setText(Months[mgr.GetCurrentMonth()] + " 2013");
+
+    	 SetCurrentDate(kCal);
+	
+		 
+		 
+		 prev.setOnClickListener(new View.OnClickListener() {
+             public void onClick(View v) {
+                 int currMonth = mgr.GetCurrentMonth();
+                 if(currMonth > 0)
+                 {
+                	 mgr.UpdateCalendar(currMonth - 1);
+                	 mgr.SetCurrentMonth(currMonth - 1);
+                	 String[] Months =  {"MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC","JAN", "FEB", "MAR", "APR"};
+                	if((currMonth - 1) < 10)
+                		 Month.setText(Months[currMonth - 1] + " 2012");
+                	 else
+                		 Month.setText(Months[currMonth - 1] + " 2013");
+
+                 
+                 }
+             }
+         });
+		 next.setOnClickListener(new View.OnClickListener() {
+             public void onClick(View v) {
+            	 int currMonth = mgr.GetCurrentMonth();
+                 if(currMonth < 13)
+                 {
+                	 mgr.UpdateCalendar(currMonth + 1);
+                	 mgr.SetCurrentMonth(currMonth + 1);
+                	 String[] Months =  {"MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC","JAN", "FEB", "MAR", "APR"};
+
+                	 if((currMonth + 1) < 10)
+                		 Month.setText(Months[currMonth + 1] + " 2012");
+                	 else
+                		 Month.setText(Months[currMonth + 1] + " 2013");
+                 }
+             }
+         });
+	}
+	
+	public void SetCurrentDate(CalendarWidget kCal) {
+		// TODO Auto-generated method stub
+		for(int i = 0; i < 35; ++i)
+		{
+			if(kCal.cell[i].date.getText().toString().length() == 0)
+				continue;
+			kCal.checkForCurrentData(kCal.cell[i]);
+		}
+	}
+
+	TextView Month;
+	Button next;
+	Button prev;
+	KCalendarManager mgr;
+
+
+}

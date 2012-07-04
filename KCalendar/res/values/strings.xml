@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, KCalendarActivity!</string>
+    <string name="app_name">Kashmiri Calendar 2012</string>
+    <string name="Prev">Previous</string>
+    <string name="Next">Next</string>
+    <string name="tab_calendar">Calendar</string>
+    <string name="tab_reminders">Reminders</string>
+    <string name="tab_feedback">Feedback</string>
+
+</resources>

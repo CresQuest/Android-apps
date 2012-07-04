@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+	android:id="@+id/widget54"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+<TableRow
+	android:id="@+id/widget55"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:orientation="horizontal">
+<TextView
+	android:id="@+id/text_x_plane"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="X Plane" />
+<EditText
+	android:id="@+id/edit_x_plane"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:textSize="18sp"
+	android:layout_gravity="right" />
+</TableRow>
+<TableRow
+	android:id="@+id/widget58"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:orientation="horizontal">
+<TextView
+	android:id="@+id/text_y_plane"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="Y Plane" />
+<EditText
+	android:id="@+id/edit_y_plane"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:textSize="18sp" />
+</TableRow>
+<TableRow
+	android:id="@+id/widget61"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:orientation="horizontal">
+<TextView
+	android:id="@+id/text_z_plane"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="Z Plane" />
+<EditText
+	android:id="@+id/edit_z_plane"
+	android:layout_width="131px"
+	android:layout_height="wrap_content"
+	android:background="#ffffffff"
+	android:textSize="18sp" />
+</TableRow>
+<TableLayout
+	android:id="@+id/widget64"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+<TableRow
+	android:id="@+id/widget66"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:orientation="horizontal">
+<TextView
+	android:id="@+id/relative_x"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="Relative X" />
+<EditText
+	android:id="@+id/edit_rel_x"
+	android:layout_width="118px"
+	android:layout_height="wrap_content"
+	android:textSize="18sp" />
+</TableRow>
+<TableRow
+	android:id="@+id/widget67"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:orientation="horizontal">
+<TextView
+	android:id="@+id/text_relative_y"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="Relative Y" />
+<EditText
+	android:id="@+id/EditText"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:textSize="18sp" />
+</TableRow>
+<TableRow
+	android:id="@+id/widget68"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:orientation="horizontal">
+<TextView
+	android:id="@+id/text_relative_z"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="Relative Z" />
+<EditText
+	android:id="@+id/edit_rel_z"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:textSize="18sp" />
+</TableRow>
+</TableLayout>
+</TableLayout>

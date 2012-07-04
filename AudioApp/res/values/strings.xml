@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, AudioAppActivity!</string>
+    <string name="app_name">AudioApp</string>
+    <string name="play_button">Play</string>
+    <string name="stop_button">Stop</string>
+
+</resources>

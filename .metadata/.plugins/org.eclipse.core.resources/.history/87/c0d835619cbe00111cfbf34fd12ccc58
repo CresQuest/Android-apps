@@ -1,0 +1,81 @@
+package com.google.example.ads.fundamentals;
+
+import com.google.ads.Ad;
+import com.google.ads.AdListener;
+import com.google.ads.AdRequest;
+import com.google.ads.AdRequest.ErrorCode;
+import com.google.ads.AdSize;
+import com.google.ads.AdView;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.LinearLayout;
+
+/**
+ * A simple {@link Activity} that embeds an AdView.
+ */
+public class BannerSample extends Activity implements AdListener{
+  private static final String AD_UNIT_ID_GOES_HERE = "k736247a5e684319e89fc6ea84e76a83";
+/** The view to show the ad. */
+  private AdView adView;
+
+  /** Called when the activity is first created. */
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.main);
+
+    // Create an ad.
+    adView = new AdView(this, AdSize.BANNER, AD_UNIT_ID_GOES_HERE);
+
+    // Add the AdView to the view hierarchy. The view will have no size
+    // until the ad is loaded.
+    LinearLayout layout = (LinearLayout) findViewById(R.id.linearLayout);
+    layout.addView(adView);
+
+    // Create an ad request. Check logcat output for the hashed device ID to
+    // get test ads on a physical device.
+    AdRequest adRequest = new AdRequest();
+    adRequest.addTestDevice(AdRequest.TEST_EMULATOR);
+    adRequest.addTestDevice("45A76B2818E4A6B34A3C013AC3FD8B64");
+
+    // Start loading the ad in the background.
+    adView.loadAd(adRequest);
+  }
+
+  /** Called before the activity is destroyed. */
+  @Override
+  public void onDestroy() {
+    // Destroy the AdView.
+    if (adView != null) {
+      adView.destroy();
+    }
+
+    super.onDestroy();
+  }
+
+public void onDismissScreen(Ad arg0) {
+	// TODO Auto-generated method stub
+	
+}
+
+public void onFailedToReceiveAd(Ad arg0, ErrorCode arg1) {
+	// TODO Auto-generated method stub
+	
+}
+
+public void onLeaveApplication(Ad arg0) {
+	// TODO Auto-generated method stub
+	
+}
+
+public void onPresentScreen(Ad arg0) {
+	// TODO Auto-generated method stub
+	
+}
+
+public void onReceiveAd(Ad arg0) {
+	// TODO Auto-generated method stub
+	
+}
+}

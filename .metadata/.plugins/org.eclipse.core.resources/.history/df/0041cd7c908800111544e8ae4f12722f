@@ -1,0 +1,12 @@
+
+package kashmiri.calendar.namespace;
+
+import android.app.Activity;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.widget.LinearLayout.LayoutParams;
+
+
+public class KCalRemindersActivity extends Activity{
+
+}

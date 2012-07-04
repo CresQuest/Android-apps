@@ -1,0 +1,72 @@
+!SESSION 2012-01-29 11:22:15.843 -----------------------------------------------
+eclipse.buildId=M20110909-1335
+java.version=1.6.0_30
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY com.android.ide.eclipse.ddms 4 0 2012-01-29 11:22:25.046
+!MESSAGE DDMS files not found: E:\Android\Downloads\eclipse-SDK-3.7.1-win32\eclipse\platform-tools\adb.exe E:\Android\Downloads\eclipse-SDK-3.7.1-win32\eclipse\tools\hprof-conv.exe E:\Android\Downloads\eclipse-SDK-3.7.1-win32\eclipse\tools\traceview.bat 
+
+!ENTRY org.eclipse.ui 4 4 2012-01-29 11:55:59.250
+!MESSAGE Invalid preference page path: XML Syntax
+!SESSION 2012-01-29 11:58:13.671 -----------------------------------------------
+eclipse.buildId=M20110909-1335
+java.version=1.6.0_30
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-01-29 14:27:06.296
+!MESSAGE Failed to load properties file for project 'Hello World'
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-01-30 00:11:13.437
+!MESSAGE No command output when running: 'am start -n hello.world.namespace/hello.world.namespace.HelloWorldActivity -a android.intent.action.MAIN -c android.intent.category.LAUNCHER' on device emulator-5556
+!STACK 0
+com.android.ddmlib.ShellCommandUnresponsiveException
+	at com.android.ddmlib.AdbHelper.executeRemoteCommand(AdbHelper.java:408)
+	at com.android.ddmlib.Device.executeShellCommand(Device.java:364)
+	at com.android.ide.eclipse.adt.internal.launch.ActivityLaunchAction.doLaunchAction(ActivityLaunchAction.java:74)
+	at com.android.ide.eclipse.adt.internal.launch.AndroidLaunchController.launchApp(AndroidLaunchController.java:1198)
+	at com.android.ide.eclipse.adt.internal.launch.AndroidLaunchController.clientChanged(AndroidLaunchController.java:1548)
+	at com.android.ddmlib.AndroidDebugBridge.clientChanged(AndroidDebugBridge.java:871)
+	at com.android.ddmlib.Device.update(Device.java:489)
+	at com.android.ddmlib.Client.update(Client.java:836)
+	at com.android.ddmlib.HandleAppName.handleAPNM(HandleAppName.java:90)
+	at com.android.ddmlib.HandleAppName.handleChunk(HandleAppName.java:64)
+	at com.android.ddmlib.MonitorThread.callHandler(MonitorThread.java:414)
+	at com.android.ddmlib.MonitorThread.processClientActivity(MonitorThread.java:322)
+	at com.android.ddmlib.MonitorThread.run(MonitorThread.java:263)
+
+!ENTRY org.eclipse.ui 4 4 2012-01-30 00:11:42.875
+!MESSAGE Invalid preference page path: XML Syntax
+!SESSION 2012-01-30 12:33:20.907 -----------------------------------------------
+eclipse.buildId=M20110909-1335
+java.version=1.6.0_30
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.ui 4 4 2012-01-30 12:58:24.007
+!MESSAGE Invalid preference page path: XML Syntax
+!SESSION 2012-01-31 12:27:52.687 -----------------------------------------------
+eclipse.buildId=M20110909-1335
+java.version=1.6.0_30
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.ui 4 4 2012-01-31 12:54:50.381
+!MESSAGE Invalid preference page path: XML Syntax
+!SESSION 2012-03-14 17:59:45.185 -----------------------------------------------
+eclipse.buildId=M20110909-1335
+java.version=1.6.0_30
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.ui 4 4 2012-03-14 18:04:22.950
+!MESSAGE Invalid preference page path: XML Syntax
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2012-03-14 18:27:05.767
+!MESSAGE Failed to load properties file for project 'OpenGL'

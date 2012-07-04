@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Extracts string &apos;null&apos; into R.string.Prev" description="Extracts string &apos;null&apos; into R.string.Prev" flags="6" id="com.android.ide.eclipse.adt.refactoring.extract.string" mode="SELECT_NEW_ID" proj="/KCalendar" rplc-all-java="false" rplc-all-xml="false" stamp="1334324870233"/>&#x0A;<refactoring comment="Extracts string &apos;null&apos; into R.string.Next" description="Extracts string &apos;null&apos; into R.string.Next" flags="6" id="com.android.ide.eclipse.adt.refactoring.extract.string" mode="SELECT_NEW_ID" proj="/KCalendar" rplc-all-java="false" rplc-all-xml="false" stamp="1334324986781"/>
+</session>

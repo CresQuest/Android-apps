@@ -1,0 +1,95 @@
+package kashmiri.calendar.namespace;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.HorizontalScrollView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.ViewFlipper;
+
+public class MainPage extends LinearLayout {
+
+	public MainPage(Context context) {
+		super(context);
+
+		
+		
+		
+		//Header options
+		this.setOrientation(LinearLayout.VERTICAL);
+		this.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.WRAP_CONTENT));
+
+		
+		Month = (TextView)KStyleItems.GetNormalTextView(context);
+		LinearLayout header = new LinearLayout(context);
+		header.setOrientation(LinearLayout.HORIZONTAL);
+		  
+
+		
+		HorizontalScrollView cal_container = new HorizontalScrollView(context);
+		cal_container.setFillViewport(true);
+		CalendarWidget kCal = new CalendarWidget(context,this);
+		cal_container.addView(kCal);	
+		
+		LinearLayout footer = new LinearLayout(context);
+		footer.setOrientation(LinearLayout.HORIZONTAL);
+		footer.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+
+		prev = new Button(context);
+		prev.setText("Previous");
+		footer.addView(prev);
+		
+		next = new Button(context);
+		next.setText("Next");
+		footer.addView(next);
+		footer.setGravity(Right);
+
+		this.addView(header);
+		this.addView(Month);
+		this.addView(cal_container);
+		this.addView(footer);
+		
+		mgr = new KCalendarManager(context, kCal);
+    	 String[] Months =  {"MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC","JAN", "FEB"};
+    	 Month.setText(Months[mgr.GetCurrentMonth()]);	
+
+	
+		 
+		 
+		 prev.setOnClickListener(new View.OnClickListener() {
+             public void onClick(View v) {
+                 int currMonth = mgr.GetCurrentMonth();
+                 if(currMonth > 0)
+                 {
+                	 mgr.UpdateCalendar(currMonth - 1);
+                	 mgr.SetCurrentMonth(currMonth - 1);
+                	 String[] Months =  {"MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC","JAN", "FEB", "MAR", "APR"};
+                	 Month.setText(Months[currMonth - 1]);	
+                 }
+             }
+         });
+		 next.setOnClickListener(new View.OnClickListener() {
+             public void onClick(View v) {
+            	 int currMonth = mgr.GetCurrentMonth();
+                 if(currMonth < 13)
+                 {
+                	 mgr.UpdateCalendar(currMonth + 1);
+                	 mgr.SetCurrentMonth(currMonth + 1);
+                	 String[] Months =  {"MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC","JAN", "FEB", "MAR", "APR"};
+
+                	 Month.setText(Months[currMonth + 1]);
+                 }
+             }
+         });
+	}
+	
+	TextView Month;
+	Button next;
+	Button prev;
+	KCalendarManager mgr;
+
+
+}

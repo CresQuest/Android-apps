@@ -1,0 +1,109 @@
+package com.example.android.BluetoothChat;
+
+import java.util.HashMap;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
+
+public class SensorValuesActivity extends Activity implements SensorEventListener{
+
+	/** Called when the activity is first created. */
+	
+	public static String Message;
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+	    super.onCreate(savedInstanceState);
+	
+	    // TODO Auto-generated method stub
+	    LayoutInflater inflater = (LayoutInflater)this.getSystemService
+			      (Context.LAYOUT_INFLATER_SERVICE);
+
+	    View setView = inflater.inflate(R.layout.sensor_values, null);
+	    setContentView(setView.findViewById(R.id.table_sensor_values));
+	    mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+        
+        //Intent intent = getIntent();
+        //HashMap<String, Activity> hashMap = (HashMap<String, Activity>)intent.getSerializableExtra("map");
+        //chat = (BluetoothChat) hashMap.get("key");
+	}
+
+	public void onAccuracyChanged(Sensor sensor, int accuracy) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	 @Override
+	    public synchronized void onResume() {
+	        super.onResume();
+	        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+	 }
+	public void onSensorChanged(SensorEvent event) {
+		// TODO Auto-generated method stub
+		tvX= (TextView)findViewById(R.id.edit_x_plane);
+		tvY= (TextView)findViewById(R.id.edit_y_plane);
+		tvZ= (TextView)findViewById(R.id.edit_z_plane);
+		
+		rel_tvX= (TextView)findViewById(R.id.edit_rel_x);
+		rel_tvY= (TextView)findViewById(R.id.edit_rel_y);
+		rel_tvZ= (TextView)findViewById(R.id.edit_rel_z);
+		
+		
+		float x = event.values[0];
+		float y = event.values[1];
+		float z = event.values[2];
+		//if (!mInitialized) {
+		mLastX = x;
+		mLastY = y;
+		mLastZ = z;
+		tvX.setText("0.0");
+		tvY.setText("0.0");
+		tvZ.setText("0.0");
+		//mInitialized = true;
+		//} else {
+		//float deltaX = Math.abs(mLastX - x);
+		//float deltaY = Math.abs(mLastY - y);
+		//float deltaZ = Math.abs(mLastZ - z);
+//		if (deltaX < NOISE) deltaX = (float)0.0;
+//		if (deltaY < NOISE) deltaY = (float)0.0;
+//		if (deltaZ < NOISE) deltaZ = (float)0.0;
+		mLastX = x;
+		mLastY = y;
+		mLastZ = z;
+		tvX.setText(Float.toString(mLastX));
+		tvY.setText(Float.toString(mLastY));
+		tvZ.setText(Float.toString(mLastZ));
+		
+		
+		
+		Message = "X:" + mLastX + ":Y:" + mLastY + ":Z:" + mLastZ;
+		
+		
+		
+	}
+	
+	public static void updateUI(float rel_x, float rel_y, float rel_z)
+	{
+		rel_tvX.setText(Float.toString(rel_x));
+		rel_tvY.setText(Float.toString(rel_y));
+		rel_tvZ.setText(Float.toString(rel_z));
+	}
+
+    private SensorManager mSensorManager;
+    private static float mLastX, mLastY, mLastZ;
+    private Sensor mAccelerometer;
+    private BluetoothChat chat;
+    
+    public static TextView tvX, tvY, tvZ, rel_tvX, rel_tvY, rel_tvZ;
+    //public static EditText rel_tvX,rel_tvY, rel_tvZ;
+}

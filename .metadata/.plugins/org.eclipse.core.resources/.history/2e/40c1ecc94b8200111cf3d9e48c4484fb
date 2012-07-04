@@ -1,0 +1,69 @@
+package test.db.namespace;
+
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+public class DatabaseAdapter extends SQLiteOpenHelper {
+    private static String dbPath= "data/data/com.db/applicationDb/"; 
+    private static String dbName = "YourDBName"; 
+    private SQLiteDatabase applicationDatabase;  
+    private final Context applicationContext;
+
+   
+    public VocabTesterDatabaseHelper(Context context) {    
+            super(context,  dbName , null, 3);
+            this. applicationContext  = context;
+    }
+
+
+    private boolean checkDataBase(){  
+            File dbFile = new File( dbPath +  dbName);  
+return dbFile.exists();
+}
+
+
+     private void copyDataBase() throws IOException{  
+try {
+
+               InputStream input =  applicationContext .getAssets().open(dbName);
+                      String outPutFileName=  dbPath  +  dbName ;
+                 OutputStream output = new FileOutputStream( outPutFileName); 
+                  byte[] buffer = new byte[1024];
+               int length;
+               while ((length = input.read(buffer))>0){
+               output.write(buffer, 0, length);
+               }
+               output.flush();
+               output.close();
+               input.close();
+    }
+                  catch (IOException e) {
+                Log.v("error",e.toString());
+               }
+}
+
+
+        public void openDataBase() throws SQLException{
+            String fullDbPath= dbPath + dbName;
+          applicationDatabase = SQLiteDatabase.openDatabase( fullDbPath,     null,SQLiteDatabase.OPEN_READONLY);
+}
+
+           @Override
+public synchronized void close() {
+     if( applicationDatabase != null)
+       applicationDatabase .close();
+          super.close();
+}
+@Override
+public void onCreate(SQLiteDatabase db) {
+}
+@Override
+public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) { 
+}
+
+
+
+
+
+
+}

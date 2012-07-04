@@ -1,0 +1,43 @@
+package kashmiri.calendar.namespace;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+
+public class KCalendarManager {
+	
+	public void LoadCalendarData(Context context)
+	{
+		database_handler = new DatabaseHandler(context);
+	}
+	
+	public void SetCurrentMonth(int currMonth)
+	{
+		CurrentMonth = currMonth;
+	}
+	
+	public void SetCalendar(CalendarWidget cal)
+	{
+		
+		calendar = cal;
+	}
+	
+	public void UpdateCalendar(int currMonth)
+	{
+		database_handler.getMonthInformation(currMonth);
+		 if (cursor.moveToFirst()) {
+           do {
+               Contact contact = new Contact();
+               contact.setID(Integer.parseInt(cursor.getString(0)));
+               contact.setName(cursor.getString(1));
+               contact.setPhoneNumber(cursor.getString(2));
+               // Adding contact to list
+               contactList.add(contact);
+           } while (cursor.moveToNext());
+       }
+	}
+	
+	CalendarWidget calendar;
+	int				CurrentMonth;
+	DatabaseHandler	database_handler;
+
+}

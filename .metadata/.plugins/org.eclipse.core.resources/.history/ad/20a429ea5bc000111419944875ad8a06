@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, Testproj1Activity!</string>
+    <string name="app_name">Stryker HAT modified</string>
+    <string name="str_set_server">Set Server</string>
+    <string name="connect_server">Connect to Server</string>
+    <string name="get_ip">Get IP</string>
+    <string name="show_orientation">Show Orientation</string>
+
+</resources>

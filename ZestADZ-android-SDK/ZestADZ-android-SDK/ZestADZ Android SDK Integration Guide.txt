@@ -1,0 +1,63 @@
+How to integrate Android SDK Version 1.2 with your Apps:
+
+Note: This instructions are given for standalone ZestADZ Android SDK integration with your app. AdWhirl users please refer instructions given in the AdWhirl site.
+
+Step 1:  Download ZestADZ Android SDK from http://www.zestadz.com 
+
+Step 2: Integrate Zestadz SDK jar
+	a) Go to your Application Directory in Eclipse. Right click and add External Archives for your application.
+	b) Select the ZestADZ android SDK jar file which you have downloaded.
+	c) Add that jar with your Apps.
+
+Step 3: Androidmanifest.xml
+	Follow the steps below in your Androidmanifest.xml file.
+	a. Give Internet Permission to pull the Ad from ZestADZ before </manifest> tag. 
+              Example:
+                              <uses-permission android:name="android.permission.INTERNET" />
+               </manifest>
+	b. Specify your ZestADZ Ad client ID before the </application> tag. 
+	Example: 
+ <!-- The application's Adclient ID assigned by ZestADZ -->
+ <meta-data android:value="14131C047A50414347574B574153415E8C" android:name="ZestADZ_Adclient_ID" />
+</application>
+	
+Step 4: attrs.xml
+	The attrs.xml file specifies custom Zestadz Ad attributes in XML layout files. If your application does not contain the file named /res/values/attrs.xml, then create one and copy-and-paste the following into your app. If your application already has that file then just add the declare-styleable element.
+  <?xml version="1.0" encoding="utf-8"?>
+	<resources>
+	<declare-styleable name="com.zestadz.android.ZestadzAd">
+		<attr name="testing" format="boolean" />
+		<attr name="backgroundColor" format="color" />
+		<attr name="textColor" format="color" />
+		<attr name="keywords" format="string" />
+		<attr name="refreshInterval" format="integer" />
+		<attr name="isGoneWithoutAd" format="boolean" />
+	</declare-styleable>
+	</resources>
+
+Step 5: Ad Placements in your Layout.
+	a. Provide 50px paddingBottom in your app layout (which is the layout you are using to display your application on the screen). This space is for displaying the ads at the bottom of the page. If you would like to display the ad at the top then provide 50px paddingTop in your application layout. The Ad height is obviously 50px.
+
+	b. Add the following ZestADZ custom View code in your layout file at the bottom. 
+
+	<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res/your_app_package"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+    
+        <com.zestadz.android.ZestadzAd android:id="@+id/ad" 
+          android:layout_width="fill_parent" 
+          android:layout_height="wrap_content"
+          android:layout_alignParentBottom="true"
+          android:clickable="true"
+          app:backgroundColor="#000000"
+          app:textColor="#FFFFFF"
+          app:keywords="Android game"/>
+                        
+        </RelativeLayout>	
+
+	
+Step 6: Publishers are requested to Override the OnStop() method from the App and call the ZestadzAd.stopAdpull() method from the onStop() method by importing com.zestadz.android.* package.
+
+
