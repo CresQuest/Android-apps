@@ -1,0 +1,7 @@
+<resources>
+
+    <string name="app_name">MagickMenu</string>
+    <string name="title_menu_detail">Menu Detail</string>
+    <string name="title_menu_list">Menus</string>
+
+</resources>
